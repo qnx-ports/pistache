@@ -571,7 +571,7 @@ TEST(headers_test, date_test_ostream)
     d4.parse("Fri, 25 Jan 2019 21:04:45.000000000 UTC");
     d4.write(os);
     const char* cstr_to_compare = "Fri, 25 Jan 2019 21:04:45."
-#if defined __clang__ && !defined __linux__
+#if defined (__QNX__) || (__clang__ && !defined __linux__)
                                   "000000"
 #elif defined _MSC_VER // Microsoft Visual Compiler
                                   "0000000"

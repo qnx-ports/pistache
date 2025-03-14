@@ -16,7 +16,7 @@
 
 #ifdef _USE_LIBEVENT_LIKE_APPLE
 
-#ifdef __NetBSD__
+#if defined __NetBSD__ || defined __QNX__
 // For TCP_NODELAY
 #include <netinet/in.h>
 #include <netinet/tcp.h>
@@ -51,7 +51,7 @@
 using std::to_string;
 
 #ifdef _USE_LIBEVENT_LIKE_APPLE
-#if defined(__NetBSD__) || defined(_IS_WINDOWS)
+#if defined(__NetBSD__) || defined(_IS_WINDOWS) || defined(__QNX__)
 #define PS_USE_TCP_NODELAY 1
 #endif
 #endif
@@ -849,7 +849,6 @@ namespace Pistache::Tcp
             {
                 bytesWritten = -1;
             }
-
 #else
         bytesWritten = PS_SENDFILE(GET_ACTUAL_FD(fd), file, &offset, len);
 #endif

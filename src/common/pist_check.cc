@@ -28,6 +28,9 @@
 #include <windows.h> // required for dbghelp.h
 #include <dbghelp.h>
 // See pist_timelog.h for usage
+#elif defined(__QNX__)
+#include <cxxabi.h>
+#include <dlfcn.h>
 #else
 #include <cxxabi.h> // for abi::__cxa_demangle
 #include <execinfo.h>
@@ -129,6 +132,12 @@ static void logStackTrace(int pri)
 
         PSLogNoLocFn(pri, PS_LOG_AND_STDOUT, "  ST- %s", name);
     }
+}
+
+#elif defined(__QNX__)
+static void logStackTrace(int pri)
+{
+
 }
 
 #else

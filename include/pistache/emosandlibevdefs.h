@@ -39,7 +39,7 @@
   #endif
 #endif
 
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined (__QNX__)
   #ifndef _USE_LIBEVENT
     #define _USE_LIBEVENT 1
   #endif

@@ -261,7 +261,7 @@ extern "C" char * pist_strerror_r(int errnum, char *buf, size_t buflen)
 /* ------------------------------------------------------------------------- */
 
 #elif !defined(__linux__) && ((!defined(__GNUC__)) || (defined(__MINGW32__)) \
-      || (defined(__clang__)) || (defined(__NetBSD__)) || (defined(__APPLE__)))
+      || (defined(__clang__)) || (defined(__NetBSD__)) || (defined(__APPLE__)) || (defined(__QNX__)))
 
 #include <pistache/ps_strl.h>
 

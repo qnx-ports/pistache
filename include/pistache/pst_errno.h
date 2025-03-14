@@ -23,6 +23,8 @@
 
 #ifdef _IS_WINDOWS
 #include <errno.h>
+#elif defined(__QNX__)
+#include <errno.h>
 #else
 #include <sys/errno.h>
 #endif

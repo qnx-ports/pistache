@@ -19,7 +19,7 @@
 
 /* ------------------------------------------------------------------------- */
 
-#if defined(_IS_WINDOWS) || defined(_IS_BSD)
+#if defined(_IS_WINDOWS) || defined(_IS_BSD) || defined(__QNX__)
 
 #include <sys/types.h> // off_t, size_t
 #include <pistache/em_socket_t.h>
@@ -34,7 +34,7 @@ extern "C" PST_SSIZE_T ps_sendfile(em_socket_t out_fd, int in_fd,
 
 /* ------------------------------------------------------------------------- */
 
-#else // of if defined(_IS_WINDOWS) || defined(_IS_BSD)
+#else // of if defined(_IS_WINDOWS) || defined(_IS_BSD) || defined(__QNX__)
 
 /* ------------------------------------------------------------------------- */
 
@@ -42,7 +42,7 @@ extern "C" PST_SSIZE_T ps_sendfile(em_socket_t out_fd, int in_fd,
 
 #ifdef __linux__
 #include <sys/sendfile.h>
-#elif defined __APPLE__
+#elif defined __APPLE__ || defined __QNX__
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
@@ -50,7 +50,7 @@ extern "C" PST_SSIZE_T ps_sendfile(em_socket_t out_fd, int in_fd,
 
 #define PS_SENDFILE ::sendfile
 
-#endif // of if defined(_IS_WINDOWS) || defined(_IS_BSD)... else...
+#endif // of if defined(_IS_WINDOWS) || defined(_IS_BSD) || defined(__QNX__) ... else...
 
 /* ------------------------------------------------------------------------- */
 #endif // of ifndef _PIST_PS_SENDFILE_H_

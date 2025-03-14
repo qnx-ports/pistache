@@ -138,7 +138,7 @@ extern "C" PST_SSIZE_T ps_sendfile(em_socket_t out_fd, int in_fd,
 
 /* ------------------------------------------------------------------------- */
 
-#elif defined(_IS_BSD)
+#elif defined(_IS_BSD) || defined (__QNX__)
 
 /* ------------------------------------------------------------------------- */
 

@@ -135,6 +135,12 @@ typedef int PST_SOCK_OPT_VAL_T;
 // #define PST_CLOCK_REALTIME_ALARM                8
 // #define PST_CLOCK_BOOTTIME_ALARM                9
 
+#elif defined __QNX__
+#define PST_CLOCK_REALTIME CLOCK_REALTIME
+#define PST_CLOCK_MONOTONIC CLOCK_MONOTONIC
+#define PST_CLOCK_PROCESS_CPUTIME_ID CLOCK_PROCESS_CPUTIME_ID
+#define PST_CLOCK_THREAD_CPUTIME_ID CLOCK_THREAD_CPUTIME_ID
+
 #else
 #define PST_CLOCK_REALTIME CLOCK_REALTIME
 #define PST_CLOCK_MONOTONIC CLOCK_MONOTONIC
@@ -182,7 +188,7 @@ typedef int PST_SOCK_OPT_VAL_T;
 // mingw gcc doesn't define strerror_r (Oct/2024)
 // gcc on macOS does define strerror_r, but the XSI version not the POSIX one
 #if defined(__linux__) || (defined(__GNUC__) && (!defined(__MINGW32__)) && \
-      (!defined(__clang__)) && (!defined(__NetBSD__)) && (!defined(__APPLE__)))
+      (!defined(__clang__)) && (!defined(__NetBSD__)) && (!defined(__APPLE__)) && (!defined(__QNX__)))
 #define PST_STRERROR_R_HDR "string.h"
 #define PST_STRERROR_R strerror_r // returns char *
 #else

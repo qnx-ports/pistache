@@ -1916,8 +1916,8 @@ EmEventTmrFd::EmEventTmrFd(PST_CLOCK_ID_T clock_id,
             break;
 
         case PST_CLOCK_MONOTONIC:
-        #ifndef _IS_BSD
-        // CLOCK_MONOTONIC_RAW not defined on FreeBSD13.3 and OpenBSD 7.3
+        #if !defined(_IS_BSD) && !defined(__QNX__)
+        // CLOCK_MONOTONIC_RAW not defined on FreeBSD13.3 and OpenBSD 7.3 and QNX
         case PST_CLOCK_MONOTONIC_RAW:
         #endif
         #ifdef __APPLE__
@@ -3549,7 +3549,7 @@ EmEventTmrFd::EmEventTmrFd(PST_CLOCK_ID_T clock_id,
             case SIGCHLD: // child status has changed
             case SIGIO:   // I/O is possible on a descriptor (see fcntl(2))
             case SIGWINCH:// Window size change
-            #ifndef __linux__
+            #if !defined(__linux__) && !defined(__QNX__)
             case SIGINFO: // status request from keyboard
                 // May be undefined on Linux, or means power failure (SIGPWR)
             #endif

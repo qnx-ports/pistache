@@ -21,7 +21,8 @@ fs = import('fs')
 
 #macOS host_machine.system() is 'darwin'
 
-if host_machine.system() != 'linux' and host_machine.system() != 'darwin' and host_machine.system() != 'windows' and not host_machine.system().endswith('bsd')
+if host_machine.system() != 'linux' and host_machine.system() != 'darwin' and host_machine.system() != 'windows' and host_machine.system() != 'qnx' and not host_machine.system().endswith('bsd')
+
 	error('Pistache currenly only supports Linux, macOS, Free/Open/NetBSD and Windows.')
 endif
 
@@ -185,7 +186,7 @@ if get_option('PISTACHE_USE_SSL')
 	public_deps += openssl_dep
 endif
 
-if host_machine.system() == 'darwin' or host_machine.system() == 'windows' or host_machine.system().endswith('bsd') or get_option('PISTACHE_FORCE_LIBEVENT')
+if host_machine.system() == 'darwin' or host_machine.system() == 'windows' or host_machine.system().endswith('bsd') or host_machine.system() == 'qnx' or get_option('PISTACHE_FORCE_LIBEVENT')
 	deps_libpistache += dependency('libevent')
         if (not (host_machine.system() == 'windows'))
                 # It looks like libevent assumes windows threads in
