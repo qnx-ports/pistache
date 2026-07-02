@@ -2,7 +2,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-curl_dep = dependency('libcurl')
+if meson.is_cross_build() and host_machine.system() == 'qnx'
+  cc = meson.get_compiler('cpp')
+  curl_dep = cc.find_library('curl', required: true)
+else
+  curl_dep = dependency('libcurl')
+endif
 gtest_main_dep = dependency('gtest', main: true, fallback: ['gtest', 'gtest_main_dep'])
 gmock_dep = dependency('gmock', version: '>=1.11.0', fallback: ['gtest', 'gmock_dep'])
 
